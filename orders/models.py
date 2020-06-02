@@ -2,6 +2,13 @@ from django.db import models
 
 # Create your models here.
 
+def listMods(items):
+    mods_str = " with "
+    for item in items:
+        mods_str = mods_str + item.name + ", "
+    mods_str = mods_str[:-2]
+    return mods_str
+
 class Customer(models.Model):
     first_name = models.CharField(max_length=64)
     last_name = models.CharField(max_length=64)
@@ -57,10 +64,9 @@ class PizzaOrder(models.Model):
 
     def __str__(self):
         toppings_str = ""
-        for topping in self.toppings.all():
-            toppings_str = toppings_str + topping.name + ", "
-        
-        return f"{self.base} with {toppings_str}"
+        if self.toppings.count() > 0:
+            toppings_str = listMods(self.toppings.all())
+        return f"{self.base}{toppings_str}"
 
 class SubModifications(models.Model):
     name = models.CharField(max_length=32)
@@ -70,19 +76,34 @@ class SubModifications(models.Model):
         return self.name
 
 class NotPizzaBase(models.Model):
+    SIZE_CHOICES =[
+        ("SM", "Small"),
+        ("LG", "Large"),
+        ("NA", "Not Applicable"),
+    ]
+    GROUP_CHOICES = [
+        ("SUB","Sub Sandwich"),
+        ("PST", "Pasta"),
+        ("SLD", "Salad"),
+        ("DPL", "Dinner Platter"),
+    ]
     name = models.CharField(max_length=32)
-    size = models.CharField(max_length=16, blank=True)
+    group = models.CharField(max_length=3, choices=GROUP_CHOICES)
+    size = models.CharField(max_length=2, choices=SIZE_CHOICES)
     price = models.DecimalField(max_digits=5, decimal_places=2)
 
     def __str__(self):
-        return f"{self.size} {self.name}"
+        return f"{self.size if self.size != 'NA' else ''} {self.name} {self.group}"
 
 class NotPizzaOrder(models.Model):
     base = models.ForeignKey(NotPizzaBase, on_delete=models.CASCADE, related_name="base")
     sandwich_mod = models.ManyToManyField(SubModifications, blank=True, related_name="sub")
 
     def __str__(self):
-        return f"{self.size} {self.name} with {self.sub_mod}"
+        mods_str = ""
+        if self.sandwich_mod.count() > 0:
+            mods_str = listMods(self.sandwich_mod.all())
+        return f"{self.base}{mods_str}"
 
 class Order(models.Model):
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE, related_name="customer")
