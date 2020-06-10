@@ -1,0 +1,30 @@
+$backgroundColor: green;
+$textColor: black;
+$textColorLight: white;
+$errorColor: red;
+
+@import url('https://fonts.googleapis.com/css?family=Roboto Mono');
+
+body{
+    background-color: $backgroundColor;
+    color: $textColor;
+    font-family: 'Roboto Mono';
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+h1{
+    padding: 20px;
+    text-align: center;
+    font-weight: bolder;
+    color: $textColorLight;
+}
+
+h4{
+    font-weight: bolder;
+}
+
+.message{
+    color: $errorColor;
+}
+
