@@ -1,0 +1,17 @@
+{% extends "layout.html"%}
+
+{% block heading%}
+
+Welcome to Brianino's Pizzaria
+
+{% endblock %}
+
+{% block body %}
+
+<h4>Hello, {{ user.first_name }}</h4>
+
+<p>You are logged in: {{ user.username }}</p>
+
+<a href="{% url 'logout' %}">Logout</a>
+
+{% endblock %}
