@@ -1,6 +1,7 @@
 $backgroundColor: green;
 $textColor: black;
 $textColorLight: white;
+$altBackgroundColor: orange;
 $errorColor: red;
 
 @import url('https://fonts.googleapis.com/css?family=Roboto Mono');
@@ -28,3 +29,7 @@ h4{
     color: $errorColor;
 }
 
+#testdiv{
+    margin-top: 10px;
+    background-color: $altBackgroundColor;
+}
