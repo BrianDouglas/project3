@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto Mono");
 body {
-  background-color: green;
-  color: black;
+  background-color: #5e4206;
+  color: #130c05;
   font-family: "Roboto Mono";
   margin-left: 20px;
   margin-right: 20px;
@@ -18,17 +18,22 @@ h4 {
   font-weight: bolder;
 }
 
+a {
+  color: navy;
+}
+
 .message {
-  color: red;
+  color: #ffb204;
 }
 
 .nav-item:hover, .nav-link:hover {
-  background-color: orange;
+  background-color: #60813f;
 }
 
-#testdiv {
+#menu_container {
   margin-top: 10px;
-  background-color: orange;
+  background-color: #60813f;
+  color: #ffb204;
 }
 
 /*# sourceMappingURL=style.css.map */

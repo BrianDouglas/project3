@@ -7,26 +7,30 @@ from django.urls import reverse
 def index(request):
     context = {"logged_in" : False}
     if request.user.is_authenticated:
-        context["user"] = request.user
+        context["message"] = "Welcome " + request.user.first_name
         context["logged_in"] = True
-    return render(request, "landing_page.html", context)
+    return render(request, "menu.html", context)
 
 def login_view(request):
-    username = request.POST["username"]
-    password = request.POST["password"]
-    user = authenticate(request, username=username, password=password)
-    if user is not None:
-        login(request, user)
-        return HttpResponseRedirect(reverse("index"))
+    if request.method == "POST":
+        username = request.POST["username"]
+        password = request.POST["password"]
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return HttpResponseRedirect(reverse("index"))
+        else:
+            return render(request, "login.html", {"message": "Invalid credentials"})
     else:
-        return render(request, "login.html", {"message": "Invalid credentials"})
+        return render(request, "login.html")
 
 def acct_details(request):
     context = {
-        "user": request.user
+        "user": request.user,
+        "logged_in": True
         }
     return render(request, "acct_details.html", context)
 
 def logout_view(request):
     logout(request)
-    return render(request, "login.html", {"message": "Logged out."})
+    return render(request, "menu.html", {"message": "Logged out."})

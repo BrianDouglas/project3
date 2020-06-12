@@ -1,8 +1,9 @@
-$backgroundColor: green;
-$textColor: black;
+$backgroundColor: #5e4206;
+$altBackgroundColor: #60813f;
+$textColor: #130c05;
 $textColorLight: white;
-$altBackgroundColor: orange;
-$errorColor: red;
+$linkColor: navy;
+$errorColor: #ffb204;
 
 @import url('https://fonts.googleapis.com/css?family=Roboto Mono');
 
@@ -25,6 +26,10 @@ h4{
     font-weight: bolder;
 }
 
+a{
+    color: $linkColor;
+}
+
 .message{
     color: $errorColor;
 }
@@ -33,7 +38,8 @@ h4{
     background-color: $altBackgroundColor;
 }
 
-#testdiv{
+#menu_container{
     margin-top: 10px;
     background-color: $altBackgroundColor;
+    color: $errorColor;
 }

@@ -1,0 +1,38 @@
+{% extends "layout.html"%}
+
+{% block header %}
+{% load static %}
+    <script src = "{% static 'orders/menu.js' %}"></script>
+{% endblock %}
+
+{% block body %}
+<div class="message">
+    {{ message }}
+</div>
+<nav class="nav">
+    <a id="pizza_link"class="nav-link active" href="#">Pizza</a>
+    <a id="subs_link"class="nav-link" href="#">Subs</a>
+    <a id="salads_link" class="nav-link" href="#">Salads</a>
+    <a id="pasta_link" class="nav-link" href="#">Pasta</a>
+    <a id="platers_link" class="nav-link" href="#">Platers</a>
+</nav>
+
+<div id="menu_container">
+    <div id="pizza_menu">
+        Pizza Menu Form
+    </div>
+    <div id="subs_menu">
+        Subs Menu Form
+    </div>
+    <div id="salads_menu">
+        Salads Menu Form
+    </div>
+    <div id="pasta_menu">
+        Pasta Menu Form
+    </div>
+    <div id="platers_menu">
+        Platers Menu Form
+    </div>
+</div>
+
+{% endblock %}

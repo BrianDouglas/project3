@@ -2,30 +2,45 @@
 <html>
     <head>
         <title>Brianinos</title>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         {% load static %}
         <link rel="stylesheet" type="text/css" href="{% static 'orders/style.css' %}">
+        {% block header %}
+        {% endblock %}
     </head>
     <body>
-        <h1>{% block heading %}{% endblock %}</h1>
-        
-        <ul class="nav justify-content-end nav-pills">
-            <li class="nav-item">
-                <a class="nav-link" href="#">Cart</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Account</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Login</a>
-            </li>
-        </ul>
+    <div class="container">
+        <nav class="navbar navbar-expand">
+            <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+                <h1 class="navbar-brand mr-auto">Brianino's Pizzaria</h1>
+            </div>
+            <div class="navbar-collapse collapse w-100 order-2 dual-collapse2">
+                <div class="navbar-nav ml-auto">
+                    <div class="dropdown dropleft">
+                        <button type="button" class="btn dropdown-toggle" data-toggle="dropdown">{% load static %}<img src="{% static 'orders/pizza.png' %}" alt="Nav"></button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="{% url 'index' %}">Menu</a>
+                            <a class="dropdown-item" href="#">Cart</a>
+                            <div class="dropdown-divider"></div>
+                            {% if logged_in %}
+                                <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+                                <a class="dropdown-item" href="{% url 'acct_details' %}">Account</a>
+                            {% else %}
+                                <a class="dropdown-item" href="{% url 'login' %}">Login</a>
+                                <a class="dropdown-item disabled" href="{% url 'acct_details' %}">Account</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
         {%block body%}
-        {%endblock%}
 
-        <div id="testdiv">
-            <p>This is a test div</p>
-        </div>
+        {%endblock%}
+    </div>
     </body>
 </html>
